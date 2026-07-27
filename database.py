@@ -1,8 +1,10 @@
 import psycopg
 from psycopg import sql
+import requests
 
 
-def create_postgres_db_1(db_name):
+
+def create_db_meta(db_name):
     try:
         # 1. Connect to the default system database 'postgres'
         # 2. Explicitly set autocommit=True to prevent automatic transaction blocks
@@ -25,7 +27,7 @@ def create_postgres_db_1(db_name):
         print(f"An error occurred: {e}")
 
 
-def create_postgres_db_2(db_name):
+def create_db_site_weather(db_name):
     try:
         # 1. Connect to the default system database 'postgres'
         # 2. Explicitly set autocommit=True to prevent automatic transaction blocks
@@ -49,6 +51,6 @@ def create_postgres_db_2(db_name):
 
 
 if __name__ == "__main__":
-    create_postgres_db_1("meta")
-    create_postgres_db_2("site_weather")
+    create_db_meta("meta")
+    create_db_site_weather("site_weather")
     
