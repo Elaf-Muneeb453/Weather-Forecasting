@@ -28,6 +28,4 @@ def data_store():
 
         conn.commit()
 
-    print("Sites inserted successfully!")
-
-data_store()
+    print("Site weather data inserted successfully!")

@@ -43,7 +43,7 @@ def create_table_site_weather():
                         time_interval TIMESTAMPTZ Not NULL,
                         temperature REAL Not NULL,
                         humidity REAL Not NULL,
-                        solar_radiace REAL Not NULL
+                        solar_radiance REAL Not NULL
                     );
                 """)
 

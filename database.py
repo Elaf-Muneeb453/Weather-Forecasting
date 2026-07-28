@@ -2,7 +2,9 @@ import psycopg
 from psycopg import sql
 from create_tables import create_table_meta, create_table_site_weather
 from insert_data_meta import insert_sites
-
+from read_metadata_table import get_sites
+from weather_api import get_data
+from store_data_site_weather import data_store
 
 def create_db_meta(db_name):
     try:
@@ -44,8 +46,11 @@ def create_db_site_weather(db_name):
 
 
 if __name__ == "__main__":
-    # create_db_meta("meta")
-    # create_db_site_weather("site_weather")
+    create_db_meta("meta")
+    create_db_site_weather("site_weather")
     create_table_meta()
-    # create_table_site_weather()
+    create_table_site_weather()
     insert_sites()
+    get_sites()
+    get_data()
+    data_store()

@@ -19,8 +19,3 @@ def get_sites():
 
     return sites
 
-
-# sites = get_sites()
-
-# for site_name, latitude, longitude in sites:
-#     print(site_name, latitude, longitude)
