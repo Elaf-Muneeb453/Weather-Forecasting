@@ -17,7 +17,6 @@ def insert_sites():
         with conn.cursor() as cur:
             for _, row in sites_df.iterrows():
                 
-
                 cur.execute(
                     """
                     INSERT INTO metadata
