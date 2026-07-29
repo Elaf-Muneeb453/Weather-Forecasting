@@ -14,8 +14,6 @@ def get_sites():
             """)
 
             sites = cur.fetchall()
-
-    print("Successfully data has been fetched")
-
+            
     return sites
 
