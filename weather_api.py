@@ -61,7 +61,7 @@ def get_data():
         all_weather_data.append(weather_df)
 
     final_dataframe = pd.concat(all_weather_data, ignore_index=True)
-    final_dataframe.to_csv("all_sites_weather.csv", index=False)
+    # final_dataframe.to_csv("all_sites_weather.csv", index=False)
 
     return final_dataframe
 
