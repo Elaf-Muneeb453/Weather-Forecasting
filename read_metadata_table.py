@@ -4,7 +4,11 @@ import psycopg
 def get_sites():
 
     with psycopg.connect(
-        dbname="meta", user="postgres", password="123789", host="localhost", port="5000"
+        dbname="meta", 
+        user="postgres", 
+        password="123789", 
+        host="localhost", 
+        port="5000"
     ) as conn:
 
         with conn.cursor() as cur:
