@@ -12,7 +12,7 @@ openmeteo = openmeteo_requests.Client(session=retry_session)
 def get_weather(site_code, latitude, longitude):
 
     url = "https://api.open-meteo.com/v1/forecast"
-
+    
     params = {
         "latitude": latitude,
         "longitude": longitude,
@@ -57,10 +57,7 @@ def get_data():
     all_weather_data = []
 
     for site_code, latitude, longitude in sites:
-
-        # print(f"Fetching weather for {site_code}")
         weather_df = get_weather(site_code, latitude, longitude)
-
         all_weather_data.append(weather_df)
 
     final_dataframe = pd.concat(all_weather_data, ignore_index=True)
