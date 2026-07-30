@@ -24,7 +24,6 @@ def insert_sites():
                     """,
                     (row["site_code"], row["latitude"], row["longitude"]),
                 )
-
         conn.commit()
 
     print("Sites inserted successfully!")

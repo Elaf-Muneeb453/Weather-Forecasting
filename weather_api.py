@@ -24,13 +24,11 @@ def get_weather(site_code, latitude, longitude):
         "start_date": "2026-07-21",
         "end_date": "2026-07-28",
     }
-
+    
     responses = openmeteo.weather_api(url, params=params)
 
     response = responses[0]
-
     hourly = response.Hourly()
-
     temperature = hourly.Variables(0).ValuesAsNumpy()
     humidity = hourly.Variables(1).ValuesAsNumpy()
     radiation = hourly.Variables(2).ValuesAsNumpy()

@@ -12,7 +12,7 @@ def get_sites():
     ) as conn:
 
         with conn.cursor() as cur:
-            cur.execute("""
+            cur.execute(""" 
                 SELECT site_name, latitude, longitude
                 FROM metadata
             """)
@@ -20,4 +20,3 @@ def get_sites():
             sites = cur.fetchall()
             
     return sites
-
