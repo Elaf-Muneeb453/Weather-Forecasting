@@ -53,11 +53,13 @@ def get_weather(site_code, latitude, longitude):
 def get_data():
     sites = get_sites()
     all_weather_data = []
-
+    count = 0
     for site_code, latitude, longitude in sites:
         weather_df = get_weather(site_code, latitude, longitude)
         all_weather_data.append(weather_df)
-
+        count = count + 1
+        
+    print(f"Weather data retrieved for {count} sides")
     final_dataframe = pd.concat(all_weather_data, ignore_index=True)
     # final_dataframe.to_csv("all_sites_weather.csv", index=False)
 
