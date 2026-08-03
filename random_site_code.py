@@ -20,7 +20,9 @@ def generate_site_data(count):
                 "longitude": round(random.uniform(-180, 180), 2),
             }
         )
+        
 
     return pd.DataFrame(data)
+
 
 
