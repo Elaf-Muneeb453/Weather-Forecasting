@@ -6,13 +6,16 @@ from read_metadata_table import get_sites
 
 # Open-Meteo client setup
 cache_session = requests_cache.CachedSession(".cache", expire_after=3600)
+
 retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
+
 openmeteo = openmeteo_requests.Client(session=retry_session)
+
 
 def get_weather(site_code, latitude, longitude):
 
     url = "https://api.open-meteo.com/v1/forecast"
-    
+
     params = {
         "latitude": latitude,
         "longitude": longitude,
@@ -24,16 +27,16 @@ def get_weather(site_code, latitude, longitude):
         "start_date": "2026-07-21",
         "end_date": "2026-07-28",
     }
-    
-    responses = openmeteo.weather_api(url, params=params)
 
-    response = responses[0]
+    response = openmeteo.weather_api(url, params=params)[0]
+
     hourly = response.Hourly()
+
     temperature = hourly.Variables(0).ValuesAsNumpy()
     humidity = hourly.Variables(1).ValuesAsNumpy()
     radiation = hourly.Variables(2).ValuesAsNumpy()
 
-    hourly_dataframe = pd.DataFrame(
+    df = pd.DataFrame(
         {
             "site_code": site_code,
             "time_interval": pd.date_range(
@@ -47,21 +50,49 @@ def get_weather(site_code, latitude, longitude):
             "solar_radiance": radiation,
         }
     )
-    
-    return hourly_dataframe
+
+    return df
+
 
 def get_data():
-    sites = get_sites()
+
+    sites = list(get_sites())
+
+    BATCH_SIZE = 50
+
     all_weather_data = []
-    count = 0
-    for site_code, latitude, longitude in sites:
-        weather_df = get_weather(site_code, latitude, longitude)
-        all_weather_data.append(weather_df)
-        count = count + 1
-        
-    print(f"Weather data retrieved for {count} sides")
-    final_dataframe = pd.concat(all_weather_data, ignore_index=True)
-    # final_dataframe.to_csv("all_sites_weather.csv", index=False)
 
-    return final_dataframe
+    success = 0
+    failed = 0
 
+    for i in range(0, len(sites), BATCH_SIZE):
+
+        batch = sites[i : i + BATCH_SIZE]
+
+        print(f"Processing sites {i} - {i+len(batch)}")
+
+        for site_code, latitude, longitude in batch:
+
+            try:
+
+                weather = get_weather(site_code, latitude, longitude)
+
+                all_weather_data.append(weather)
+
+                success += 1
+
+            except Exception as e:
+
+                failed += 1
+
+                print(f"Failed {site_code}: {e}")
+
+        print(f"Success: {success}, Failed: {failed}")
+
+    print("Finished")
+
+    if all_weather_data:
+
+        return pd.concat(all_weather_data, ignore_index=True)
+
+    return pd.DataFrame()

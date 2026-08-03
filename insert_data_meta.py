@@ -15,7 +15,6 @@ def insert_sites():
     ) as conn: 
         with conn.cursor() as cur:
             for _, row in sites_df.iterrows():
-                
                 cur.execute(
                     """
                     INSERT INTO metadata
@@ -27,4 +26,6 @@ def insert_sites():
         conn.commit()
 
     print("Sites inserted successfully!")
-
+    
+    
+    
