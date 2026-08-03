@@ -11,7 +11,6 @@ retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
 
 openmeteo = openmeteo_requests.Client(session=retry_session)
 
-
 def get_weather(site_code, latitude, longitude):
 
     url = "https://api.open-meteo.com/v1/forecast"
@@ -53,7 +52,6 @@ def get_weather(site_code, latitude, longitude):
 
     return df
 
-
 def get_data():
 
     sites = list(get_sites())
@@ -69,12 +67,9 @@ def get_data():
 
         batch = sites[i : i + BATCH_SIZE]
 
-        print(f"Processing sites {i} - {i+len(batch)}")
-
         for site_code, latitude, longitude in batch:
 
             try:
-
                 weather = get_weather(site_code, latitude, longitude)
 
                 all_weather_data.append(weather)
@@ -84,12 +79,6 @@ def get_data():
             except Exception as e:
 
                 failed += 1
-
-                print(f"Failed {site_code}: {e}")
-
-        print(f"Success: {success}, Failed: {failed}")
-
-    print("Finished")
 
     if all_weather_data:
 
