@@ -4,7 +4,7 @@ from random_site_code import generate_site_data
 
 def insert_sites():
      
-    sites_df = generate_site_data(100)
+    sites_df = generate_site_data(3000)
     
     with psycopg.connect(
         dbname="meta", 
