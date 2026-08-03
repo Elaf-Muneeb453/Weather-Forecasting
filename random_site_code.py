@@ -16,8 +16,8 @@ def generate_site_data(count):
         data.append(
             {
                 "site_code": generate_site_code(),
-                "latitude": round(random.uniform(23.5, 37.5), 2),
-                "longitude": round(random.uniform(60.5, 77.5), 2),
+                "latitude": round(random.uniform(-90, 90), 2),
+                "longitude": round(random.uniform(-180, 180), 2),
             }
         )
 
