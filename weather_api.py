@@ -85,3 +85,28 @@ def get_data():
         return pd.concat(all_weather_data, ignore_index=True)
 
     return pd.DataFrame()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

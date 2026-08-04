@@ -35,7 +35,6 @@ def create_db_site_weather(db_name):
             port="5000",
             autocommit=True,
         ) as conn:
-
             with conn.cursor() as cur:
                 query = sql.SQL("CREATE DATABASE {}").format(sql.Identifier(db_name))
                 cur.execute(query)
